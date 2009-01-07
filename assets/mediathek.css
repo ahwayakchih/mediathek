@@ -1,0 +1,148 @@
+label.media {
+	padding-right: 0 !important;
+	margin-bottom: 0;
+}
+
+label.media select.hidden {
+	height: 0;
+	overflow: hidden;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+div.media {
+	margin-bottom: 1.75em;
+	border: 1px solid #999988;
+	background: #CCCCBB;
+	position: relative;
+}
+
+div.media a {
+	display: block;
+	padding: 0.5em 1em;
+	background: #CCCCBB;
+	border-bottom: 1px solid #E7E7E3;
+/*
+	border-left: 1px solid #999988;
+	border-right: 1px solid #999988;
+*/
+	color: #555544;
+}
+
+div.media ul {
+	background-color: #F5F5F3;
+/* 	border-top: 1px solid #999988; */
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	overflow: auto;
+ 	max-height: 30em;
+}
+
+div.media li {
+	border-bottom: 1px solid #E6E6E5;
+	padding: 0 6em 0 1em;
+	position: relative;
+	cursor: move;
+	overflow: hidden;
+	height: auto;
+}
+
+div.media.open li.active {
+	background: #5273C0 !important;
+	border-color:#617DC5 !important;
+}
+
+div.media.open li.even {
+	background: #fff;
+}
+
+
+div.media.closed li.active {
+	background: transparent !important;
+}
+
+div.media.closed li.zebra  {
+	background: #fff !important;
+}
+
+div.media li span {
+	padding: 0.67em 0;
+	display: block;
+	border: none;
+	background: transparent;
+	margin: 0;
+	text-align: left;
+}
+
+div.media.open li.active span {
+	color: #fff;
+}
+
+div.media li a {
+	cursor: pointer;
+	position: absolute;
+	top: 0.67em;
+	right: 1em;
+	padding: 0;
+	background: none;
+	border: none;
+	color: #5072BF;
+	z-index: 1000;
+}
+
+div.media.open li.active a {
+	color: #fff;
+}
+
+div.media li img {
+	position: absolute;
+	top: 0.67em;
+	right: 1em;
+	padding: 0;
+	background: #fff;
+	width: 50px;
+	height: 50px;
+	z-index: 2000;
+}
+
+div.media a.create {
+	padding: 0;
+	margin: 0.55em 1em;
+	position: absolute;
+	top: 0;
+	right: 0;
+	overflow: hidden;
+	text-indent: -1000em;
+	width: 66px;
+	height: 15px;
+	text-decoration: none;
+	border: none;
+}
+
+div.media.open a.create {
+	background: #81B934 url(create.png) 0 0 no-repeat;
+}
+
+div.media.closed a.create {
+	background: #999988 url(create.png) 0 0 no-repeat;
+}
+
+#mediasection {
+	padding: 0 1em;
+	background: url(loading.gif) 50% no-repeat;
+}
+
+#mediasection iframe {
+	overflow: hidden;
+	width: 100%;
+	border: none;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+div.actions {
+	position: relative;
+}
