@@ -1,0 +1,42 @@
+Mediathek
+------------------------------------
+FOR TESTING PURPOSE ONLY!
+------------------------------------
+
+Version: 0.2 (experimental!)
+Author: Nils Hörrmann (post@nilshoerrmann.de)
+Build Date: 5nd January 2009
+Requirements: Symphony 2.0
+
+This field links another section as media center. 
+It allows inline image preview and provides drag and drop features.
+
+
+[INSTALLATION]
+
+1. Upload the 'mediathek' folder in this archive to your Symphony 'extensions' folder.
+
+2. Enable it by selecting the "Field: Mediathek", choose Enable from the with-selected menu, then click Apply.
+
+3. You can now add the "Mediathek" field to your sections.
+
+
+[REQUIREMENTS]
+
+- Requires latest Symphony revision from Github.
+
+- A section containing an upload field that is used as media center resource.
+
+
+[USAGE]
+
+1. Upload files to your image or document section.
+
+2. Move to your articles section with the "Mediathek" field
+
+
+[NOTE]
+
+- This is experimental code. Do not use this field in live environment!
+
+- Currently this field does not allow data source grouping or table sorting.
