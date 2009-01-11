@@ -31,7 +31,7 @@
 		
 		function allowDatasourceParamOutput(){
 			return true;
-		}		
+		}	
 		
 
 	/**
@@ -100,9 +100,6 @@
 			
 			if(!$this->Database->insert($fields, 'tbl_fields_' . $this->handle())) return false;
 			
-			$this->removeSectionAssociation($id);
-			$this->createSectionAssociation(NULL, $id, $this->get('related_field_id'));
-			
 			return true;
 					
 		}
@@ -122,8 +119,8 @@
 
 		function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
 
-			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/assets/mootools-1.2.1-core.js', 100);
-			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/assets/mootools-1.2-more.js', 105);
+			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2.1-core.js', 100);
+			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2-more.js', 105);
 			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/assets/mediathek.js', 110);
 			$this->_engine->Page->addStylesheetToHead(URL . '/extensions/mediathek/assets/mediathek.css', 'screen', 115);
 
@@ -134,15 +131,15 @@
 
 			$entry_ids = $data['relation_id'];
 			foreach($states as $id){
-				$options[] = array($id['id'], in_array($id['id'], $entry_ids), $id['title']);
+				$options[] = array($id['id'], in_array($id['id'], $entry_ids), URL . '/workspace' . $id['file'], NULL, NULL, array('label' => $id['title']) );
 			}
 					
 			$fieldname = 'fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix;
 			$fieldname .= '[]';
 			
 			$label = Widget::Label($this->get('label'), NULL, 'media');
-			$label->appendChild(Widget::Select($fieldname, $options, array('multiple' => 'multiple') ));
-			$label->appendChild($this->createMediathek($states, $entry_ids));
+			$label->appendChild(Widget::Select($fieldname, $options, array('multiple' => 'multiple', 'class' => 'source') ));
+			$label->appendChild($this->createInlineUpload() );
 			
 			if($flagWithError != NULL) $wrapper->appendChild(Widget::wrapFormElementWithError($label, $flagWithError));
 			else $wrapper->appendChild($label);		
@@ -184,45 +181,6 @@
 
 		}		
 		
-		function createMediathek($options, $entry_ids){
-		
-			$folder = $this->Database->fetch(	
-				"SELECT  `destination` 
-				FROM  `sym_fields_upload` 
-				WHERE  `field_id` = ".$this->get('related_field_id')."
-				LIMIT 0 , 30"		
-			);
-		
-			$div = new XMLElement('div', NULL, array('class' => 'media', 'style' => 'display: none;'));
-			$navi = new XMLElement('a', 'Show Selection', array('href' => '#', 'id' => 'switch'));
-
-			$ul = new XMLElement('ul');
-			
-			$count = 1;
-			foreach($options as $option){
-				$li = new XMLElement('li');
-					$span = new XMLElement('span', $option['title']);
-					$link = new XMLElement('a', 'Preview', array('href' => URL . $folder[0]['destination'] . $option['file'], 'rel' => $option['id']));
-				$li->appendChild($span);
-				$li->appendChild($link);
-				if($count % 2 == 0) {
-					$li->setAttribute('class', 'even');
-				}
-				if(in_array($option['id'], $entry_ids)) {
-					$li->setAttribute('class', 'active');
-				}
-				$ul->appendChild($li);
-				$count++;
-			}
-			
-			$div->appendChild($navi);
-			$div->appendChild($this->createInlineUpload());
-			$div->appendChild($ul);
-			
-			return $div;
-		
-		}
-		
 		function createInlineUpload() {
 			$linked_section = $this->Database->fetch(
 				"SELECT t1.`handle`
@@ -233,9 +191,8 @@
 				LIMIT 1"
 			);	
 			$new = new XMLElement('a', __('Create New'), array(
-				'class' => 'create', 
-				'title' => 'Create a new entry in related section',
-				'href' => URL . '/symphony/publish/' . $linked_section[0]['handle'] . '/new/?mediathek=true'
+				'title' => 'Create new entry in related section',
+				'href' => URL . '/symphony/publish/' . $linked_section[0]['handle'] . '/new/'
 			));
 			return $new;
 		}
@@ -264,7 +221,7 @@
 
 			$count = count($data['relation_id']);
 			if($count > 0) {
-				return $count . '&#160;' . __('items');				
+				return $count;				
 			}
 
 		}
@@ -274,7 +231,7 @@
 		function displayDatasourceFilterPanel(&$wrapper, $data=NULL, $errors=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
 			
 			parent::displayDatasourceFilterPanel($wrapper, $data, $errors, $fieldnamePrefix, $fieldnamePostfix);
-			$text = new XMLElement('p', __('Use comma separated entry ids for filtering.') );
+			$text = new XMLElement('p', __('Use comma separated entry ids for filtering.'), array('class' => 'help') );
 			$wrapper->appendChild($text);
 			
 		}
@@ -365,31 +322,4 @@
 			);
 		}
 
-
-	/**
-	 *	OTHER FUNCTIONS
-	 */
-		
-		function fetchAssociatedEntrySearchValue($data){
-			if(!is_array($data)) return $data;
-
-			$searchvalue = $this->_engine->Database->fetchRow(0, 
-				sprintf("
-					SELECT `entry_id` FROM `tbl_entries_data_%d` 
-					WHERE `handle` = '%s' 
-					LIMIT 1", $this->get('related_field_id'), addslashes($data['handle']))
-			);
-
-			return $searchvalue['entry_id'];
-		}
-
-		function fetchAssociatedEntryCount($value){
-			return $this->_engine->Database->fetchVar('count', 0, "SELECT count(*) AS `count` FROM `tbl_entries_data_".$this->get('id')."` WHERE `relation_id` = '$value'");
-		}
-
-		function fetchAssociatedEntryIDs($value){
-			return $this->_engine->Database->fetchCol('entry_id', "SELECT `entry_id` FROM `tbl_entries_data_".$this->get('id')."` WHERE `relation_id` = '$value'");
-		}		
-		
 	}
-
