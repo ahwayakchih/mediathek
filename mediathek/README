@@ -14,24 +14,3 @@ Requirements: Symphony 2.0
 2. Enable it by selecting the "Field: Mediathek", choose Enable from the with-selected menu, then click Apply.
 
 3. You can now add the "Mediathek" field to your sections.
-
-
-[REQUIREMENTS]
-
-- Requires latest Symphony revision from Github.
-
-- A section containing an upload field that is used as media center resource.
-
-
-[USAGE]
-
-1. Upload files to your image or document section.
-
-2. Move to your articles section with the "Mediathek" field
-
-
-[NOTE]
-
-- This is experimental code. Do not use this field in live environment!
-
-- Currently this field does not allow data source grouping or table sorting.
