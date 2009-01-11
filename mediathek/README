@@ -1,15 +1,10 @@
 Mediathek
 ------------------------------------
-FOR TESTING PURPOSE ONLY!
-------------------------------------
 
-Version: 0.2 (experimental!)
+Version: 1.0
 Author: Nils Hörrmann (post@nilshoerrmann.de)
-Build Date: 5nd January 2009
+Build Date: 11th January 2009
 Requirements: Symphony 2.0
-
-This field links another section as media center. 
-It allows inline image preview and provides drag and drop features.
 
 
 [INSTALLATION]

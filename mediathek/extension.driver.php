@@ -4,14 +4,14 @@
 	
 		public function about(){
 			return array('name' => 'Field: Mediathek',
-						 'version' => '0.2 (experimental!)',
-						 'release-date' => '2009-01-05',
+						 'version' => '1.0',
+						 'release-date' => '2009-01-11',
 						 'author' => array('name' => 'Nils Hörrmann',
 										   'website' => 'http://www.nilshoerrmann.de',
 										   'email' => 'post@nilshoerrmann.de')
 				 		);
 		}
-
+   
 		public function getSubscribedDelegates(){
 		
 			return array(
