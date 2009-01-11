@@ -1,3 +1,14 @@
+/** 
+*	MEDIATHEK for Symphony 2.0
+*
+*	author:		Nils Hörrmann
+*	contact:	post@nilshoerrmann.de
+*	website:	www.nilshoerrmann.de
+*	version:	1.0
+*	date:		January 2009
+*/
+
+
 label.media {
 	padding-right: 0 !important;
 	margin-bottom: 0;
@@ -11,28 +22,23 @@ label.media select.hidden {
 	padding: 0;
 }
 
-div.media {
+label.media div {
 	margin-bottom: 1.75em;
 	border: 1px solid #999988;
 	background: #CCCCBB;
 	position: relative;
 }
 
-div.media a {
+label.media div a {
 	display: block;
 	padding: 0.5em 1em;
 	background: #CCCCBB;
 	border-bottom: 1px solid #E7E7E3;
-/*
-	border-left: 1px solid #999988;
-	border-right: 1px solid #999988;
-*/
 	color: #555544;
 }
 
-div.media ul {
+label.media div ul {
 	background-color: #F5F5F3;
-/* 	border-top: 1px solid #999988; */
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -40,7 +46,7 @@ div.media ul {
  	max-height: 30em;
 }
 
-div.media li {
+label.media div li {
 	border-bottom: 1px solid #E6E6E5;
 	padding: 0 6em 0 1em;
 	position: relative;
