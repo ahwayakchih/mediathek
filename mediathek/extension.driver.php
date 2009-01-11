@@ -21,7 +21,7 @@
 					'delegate' => 'AdminPagePreGenerate',
 					'callback' => 'addMediathek'
 				),	
-									
+
 				array(
 					'page' => '/backend/',
 					'delegate' => 'InitaliseAdminPageHead',
