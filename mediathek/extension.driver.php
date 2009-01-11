@@ -32,13 +32,14 @@
 		}
 		
 		public function layoutMediasection($context){
-			if($_GET['mediathek'] == 'true') {
+			if($_GET['mediathek'] == 'true' || $_POST['mediathek'] == 'true') {
 				$context['parent']->Page->addStylesheetToHead(URL . '/extensions/mediathek/assets/mediasection.css', 'screen', 100);
 			}
 		}
 		
 		public function addMediathek($context){
 			if($_GET['mediathek'] == 'true') {
+				$context['parent']->Page->_navigation = array();
 				$action = $context['parent']->Page->Form->getAttribute('action');
 				$context['parent']->Page->Form->setAttribute('action', $action . '?mediathek=true');
 			}
