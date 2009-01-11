@@ -82,11 +82,11 @@ label.media div li span {
 	text-align: left;
 }
 
-div.media.open li.active span {
+label.media div.open li.active span {
 	color: #fff;
 }
 
-div.media li a {
+label.media div li a {
 	cursor: pointer;
 	position: absolute;
 	top: 0.67em;
@@ -98,22 +98,50 @@ div.media li a {
 	z-index: 1000;
 }
 
-div.media.open li.active a {
+label.media div.open li.active a {
 	color: #fff;
 }
 
-div.media li img {
+label.media div li img {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	padding: 5px;
+	background: #fff;
+	width: 65px;
+	height: 65px;
+	z-index: 2000;
+	border: 1px solid #E6E6E5;
+}
+
+label.media div.open li.active img {
+	background: transparent;
+	border: 1px solid #5c85ea;
+}
+
+div.drag {
+	background: #232320;
+	border: 0;
+	position: absolute;
+	color: #555544;
+	padding: 0.67em 6em 0.67em 1em;
+	cursor: move;
+	text-decoration: none;
+	z-index: 1000;
+}
+
+div.drag a, div.drag a:hover {
+	text-decoration: none;
+	color: #5072BF;
+}
+
+div.drag span {
 	position: absolute;
 	top: 0.67em;
 	right: 1em;
-	padding: 0;
-	background: #fff;
-	width: 50px;
-	height: 50px;
-	z-index: 2000;
 }
 
-div.media a.create {
+label.media div a.create {
 	padding: 0;
 	margin: 0.55em 1em;
 	position: absolute;
@@ -127,28 +155,26 @@ div.media a.create {
 	border: none;
 }
 
-div.media.open a.create {
-	background: #81B934 url(create.png) 0 0 no-repeat;
-}
-
-div.media.closed a.create {
+label.media div a.create {
 	background: #999988 url(create.png) 0 0 no-repeat;
 }
 
-#mediasection {
+label.media div.open a.create {
+	background: #81B934 url(create.png) 0 0 no-repeat;
+}
+
+label.media #mediasection {
+	border: none;
 	padding: 0 1em;
+	margin: 0;
 	background: url(loading.gif) 50% no-repeat;
 }
 
-#mediasection iframe {
-	overflow: hidden;
+label.media #mediasection iframe {
 	width: 100%;
 	border: none;
 	position: relative;
 	margin: 0;
 	padding: 0;
-}
-
-div.actions {
-	position: relative;
+	overflow: hidden;
 }
