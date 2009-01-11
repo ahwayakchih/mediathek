@@ -55,25 +55,25 @@ label.media div li {
 	height: auto;
 }
 
-div.media.open li.active {
+label.media div.open li.active {
 	background: #5273C0 !important;
 	border-color:#617DC5 !important;
 }
 
-div.media.open li.even {
+label.media div.open li.even {
 	background: #fff;
 }
 
 
-div.media.closed li.active {
+label.media div li.active {
 	background: transparent !important;
 }
 
-div.media.closed li.zebra  {
+label.media div li.zebra  {
 	background: #fff !important;
 }
 
-div.media li span {
+label.media div li span {
 	padding: 0.67em 0;
 	display: block;
 	border: none;
