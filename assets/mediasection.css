@@ -46,6 +46,11 @@ form .actions {
 }
 
 #notice {
+	display: none;
+}
+
+#notice.success, #notice.error {
+	display: block;
 	margin: 1em 0 0 0 !important;
 	padding: 0.2em 1em !important;
 	border-bottom: none !important;
