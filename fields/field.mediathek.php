@@ -147,7 +147,9 @@
 			
 			$label = Widget::Label($this->get('label'), NULL, 'media');
 			$label->appendChild(Widget::Select($fieldname, $options, array('multiple' => 'multiple', 'class' => 'source') ));
-			$label->appendChild($this->createInlineUpload() );
+			if($_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
+				$label->appendChild($this->createInlineUpload() );
+			}
 			
 			if($flagWithError != NULL) $wrapper->appendChild(Widget::wrapFormElementWithError($label, $flagWithError));
 			else $wrapper->appendChild($label);		
