@@ -2,6 +2,8 @@
 	
 	Class fieldMediathek extends Field {
 	
+		public $ext_mediathek, $ext_mootools;
+	
 	
 	/**
 	 *	FIELD SETTINGS
@@ -119,10 +121,17 @@
 
 		function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
 
-			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2.1-core.js', 100);
-			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2-more.js', 105);
-			$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/assets/mediathek.js', 110);
-			$this->_engine->Page->addStylesheetToHead(URL . '/extensions/mediathek/assets/mediathek.css', 'screen', 115);
+			if(empty($ext_mootools) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
+				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2.1-core.js', 100);
+				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2-more.js', 105);
+				$ext_mootools = '121'; // save mootools version number
+				
+			}
+			if(empty($ext_mediathek) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
+				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/assets/mediathek.js', 110);
+				$this->_engine->Page->addStylesheetToHead(URL . '/extensions/mediathek/assets/mediathek.css', 'screen', 115);
+				$ext_mediathek = '110'; // save mediathek version number
+			}
 
 			$states = $this->findOptions();
 			$options = array();
