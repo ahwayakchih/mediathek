@@ -125,7 +125,6 @@
 				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2.1-core.js', 100);
 				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2-more.js', 105);
 				$ext_mootools = '121'; // save mootools version number
-				
 			}
 			if(empty($ext_mediathek) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
 				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/assets/mediathek.js', 110);
