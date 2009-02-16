@@ -1,9 +1,9 @@
 Mediathek
 ------------------------------------
 
-Version: 1.0
+Version: 1.1
 Author: Nils Hörrmann (post@nilshoerrmann.de)
-Build Date: 11th January 2009
+Build Date: 16th February 2009
 Requirements: Symphony 2.0
 
 
@@ -14,3 +14,22 @@ Requirements: Symphony 2.0
 2. Enable it by selecting the "Field: Mediathek", choose Enable from the with-selected menu, then click Apply.
 
 3. You can now add the "Mediathek" field to your sections.
+
+
+[CHANGE LOG]
+
+Version 1.1 - 16th February 2009
+
+- [fixed] data sources will return file information instead of IDs
+- [fixed] multiple Mediathek fields in the same section
+- [added] option to toggle between single or multiple select mode
+- [added] allow data source sorting for single select Mediathek fields
+- [added] search functionality
+- [added] tag and category filter
+- [added] toggle options for different entry overview information (file name or file count)
+- [added] German translation
+- [removed] file count for opened and closed Mediathek
+
+Version 1.0 - 11th January 2009
+
+- Initial release
