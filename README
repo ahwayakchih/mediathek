@@ -24,7 +24,7 @@ Requirements: Symphony 2.0
 
 3. IMPORTANT: Go to each section that uses a "Mediathek" field and resave it. Otherwise the extension will stop working!
 
-4. PLEASE NOTE: Be aware that due to some changes in the data source output (see change log) your XSL templates will need some tender, love and care.
+4. PLEASE NOTE: Be aware that due to some changes in the data source output (see change log) your XSL templates will need some tender love and care.
 
 
 [CHANGE LOG]
