@@ -235,7 +235,7 @@
 			$fieldname = 'fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix;
 			$fieldname .= '[]';
 			
-			$title = $this->get('label') . '<i>' . ($this->get('allow_multiple_selection') == 'yes' ? __('Multiple Choise') : __('Single Choise')) . '</i>';
+			$title = $this->get('label') . '<i>' . ($this->get('allow_multiple_selection') == 'yes' ? __('Multiple Choice') : __('Single Choice')) . '</i>';
 			$label = Widget::Label($title, NULL, 'media');
 			$label->appendChild(Widget::Select($fieldname, $options, ($this->get('allow_multiple_selection') == 'yes' ? array('multiple' => 'multiple', 'class' => 'source') : array('class' => 'source')) ));
 			$media = new XMLElement('a', NULL, array('class' => 'media'));
