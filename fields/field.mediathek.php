@@ -347,7 +347,7 @@
 			);	
 			$new = new XMLElement('a', __('Create New'), array(
 				'title' => __('Create new entry in related section'),
-				'href' => URL . '/tblphony/publish/' . $linked_section[0]['handle'] . '/new/',
+				'href' => URL . '/symphony/publish/' . $linked_section[0]['handle'] . '/new/',
 				'class' => 'create'
 			));
 			return $new;
