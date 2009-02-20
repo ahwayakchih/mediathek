@@ -1,9 +1,9 @@
 Mediathek
 ------------------------------------
 
-Version: 1.1
+Version: 1.1.1
 Author: Nils Hörrmann (post@nilshoerrmann.de)
-Build Date: 16th February 2009
+Build Date: 20th February 2009
 Requirements: Symphony 2.0
 
 
@@ -28,6 +28,11 @@ Requirements: Symphony 2.0
 
 
 [CHANGE LOG]
+
+Version 1.1.1 - 20th February 2009
+
+- [added]   Improved script detection
+- [fixed]   Added missing option to exclude tags while filtering
 
 Version 1.1 - 16th February 2009
 
