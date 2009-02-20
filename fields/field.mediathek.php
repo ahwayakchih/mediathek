@@ -2,7 +2,7 @@
 	
 	Class fieldMediathek extends Field {
 	
-		public $ext_mediathek, $ext_mootools;
+		public $ext_mediathek, $ext_mootools, $ext_mootools_drag, $ext_quicksilver;
 	
 	/**
 	 *	FIELD SETTINGS
@@ -210,11 +210,17 @@
 			
 			if(empty($ext_mootools) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
 				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2.1-core.js', 100);
-				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2-more.js', 105);
 				$ext_mootools = '121'; // save mootools version number
 			}
-			if(empty($ext_mediathek) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
+			if(empty($ext_mootools_drag) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
+				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/mootools-1.2-drag.js', 105);
+				$ext_mootools_drag = '120'; // save mootools version number
+			}
+			if(empty($ext_quicksilver) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
 				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/lib/quicksilver.js', 110);
+				$ext_quicksilver = '100'; // save mootools version number
+			}
+			if(empty($ext_mediathek) && $_GET['mediathek'] != 'true' && $_POST['mediathek'] != 'true') {
 				$this->_engine->Page->addScriptToHead(URL . '/extensions/mediathek/assets/mediathek.js', 115);
 				$this->_engine->Page->addStylesheetToHead(URL . '/extensions/mediathek/assets/mediathek.css', 'screen', 120);
 				$ext_mediathek = '110'; // save mediathek version number
@@ -255,31 +261,34 @@
 
 			$values = array();
 			
-			// filter by tags or catagories
 			if($this->get('filter_tags') != '') {
 				$tags = explode(",", $this->get('filter_tags'));
 				foreach($tags as &$tag) {
 					$tag = trim($this->cleanValue($tag));
-					$list[] = $tag;
+					if(substr($tag, 0, 1) == '-') $tags_out[] = substr($tag, 1);
+					else $tags_in[] = $tag;		
 				}
 				$fields = $this->getFilterFields();
 				$count = 3;
 				foreach($fields as $field) { 
-					$join .= " INNER JOIN  `tbl_entries_data_" . $field['id'] . "` AS t" .$count . " ";
+					$join .= "INNER JOIN  `tbl_entries_data_" . $field['id'] . "` AS t" .$count . " ";
 					$id .= "AND t1.`entry_id` = t" . $count . ".`entry_id` ";
 					if($count > 3) $in .= "OR ";
-					$in .= "t" . $count . ".`value` IN ('" . implode("', '", $list) . "') ";
+					$in .= "t" . $count . ".`value` IN ('" . implode("', '", $tags_in) . "') ";
+					if($count > 3) $out .= "OR ";
+					$out .= "t" . $count . ".`value` IN ('" . implode("', '", $tags_out) . "') ";					
 					$count++;
 				}
-				// get titles and files
+			}
+		
+			if($tags_in) {
 				$sql = "SELECT t1.`entry_id`, t1.`file`, t2.`value` 
 					FROM  `tbl_entries_data_" . $this->get('related_field_id') . "` AS t1 
 					INNER JOIN  `tbl_entries_data_" . $this->get('related_title_id') . "` AS t2 "
-					. $join . "WHERE t1.`entry_id` = t2.`entry_id` " . $id . "AND (" . $in . ")
+					. $join . "WHERE t1.`entry_id` = t2.`entry_id` " . $id . "AND (" . $in . ") 
 					LIMIT 0 , 300";
 			}
 			else {
-				// get titles and files
 				$sql = "SELECT t1.`entry_id`, t1.`file`, t2.`value` 
 					FROM  `tbl_entries_data_" . $this->get('related_field_id') . "` AS t1 
 					INNER JOIN  `tbl_entries_data_" . $this->get('related_title_id') . "` AS t2 
@@ -287,12 +296,25 @@
 					LIMIT 0 , 300";
 			}
 			
+			$filter = array();
+			if($tags_out) {
+				$filter = $this->Database->fetchcol('entry_id', 
+					"SELECT t1.`entry_id` 
+					FROM  `tbl_entries_data_" . $this->get('related_field_id') . "` AS t1 
+					INNER JOIN  `tbl_entries_data_" . $this->get('related_title_id') . "` AS t2 "
+					. $join . "WHERE t1.`entry_id` = t2.`entry_id` " . $id . "AND (" . $out . ") 
+					LIMIT 0 , 300"
+				);
+			}
+			
 			// options array
-			if($results = $this->Database->fetch($sql)){
+			if($results = $this->Database->fetch($sql)) {
 				foreach($results as $result){
-					$values[$result['entry_id']]['id'] = $result['entry_id'];				
-					$values[$result['entry_id']]['file'] = $result['file'];				
-					$values[$result['entry_id']]['title'] = $result['value'];				
+					if(!in_array($result['entry_id'], $filter)) {
+						$values[$result['entry_id']]['id'] = $result['entry_id'];				
+						$values[$result['entry_id']]['file'] = $result['file'];				
+						$values[$result['entry_id']]['title'] = $result['value'];				
+					}
 				}
 			}
 
