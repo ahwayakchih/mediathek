@@ -286,7 +286,7 @@ var SelectList = new Class({
 			this.toggleSelection(item, 'unselect')
 			this.toggleItem([item], 'fade');
 			this.setZebra(this.list.getChildren('li.active'));
-			this.getNext('a').fade('in');
+			event.target.getNext('a').fade('in');
 		}
 	
 	},
