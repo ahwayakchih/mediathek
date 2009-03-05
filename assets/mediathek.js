@@ -440,11 +440,14 @@ var SelectList = new Class({
 						clone.inject(document.body);
 					},
 					onEnter: function(element, droppable) {
-						droppable.setStyle('background-color', '#F5F5F3');
+						droppable.setStyles({
+							'background-color': '#F5F5F3',
+							'color': '#000000'
+						});
 						clone.setStyle('color', '#F48435');
 					},
 					onLeave: function(element, droppable) {
-						droppable.setStyle('background-color', 'transparent');
+						droppable.erase('style');
 						clone.setStyle('color', '#555544');
 					},
 					onDrop: function(element, droppable) {
@@ -661,7 +664,7 @@ SelectList.implement({
 
 		if(this.section.location.href.contains('/edit/')) {
 			// Entry saved
-			rel = this.section.location.href.match(/\d+/);
+			rel = this.section.location.href.match(/\d+/g);
 			var newOption = new Element('option', {
 				'selected': 'selected',
 				'text': this.section.window.document.getElements('label.file a').getProperty('href'),
