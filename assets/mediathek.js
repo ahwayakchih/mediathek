@@ -453,7 +453,7 @@ var SelectList = new Class({
 					onDrop: function(element, droppable) {
 						if(droppable) {
 							this.insertText(droppable, data);
-							droppable.setStyle('background-color', 'transparent');
+							droppable.erase('style');
 							this.toggleSelection(item.getParent('li'), 'select');
 						}
 						clone.destroy();
