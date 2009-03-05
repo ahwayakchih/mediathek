@@ -1,9 +1,9 @@
 Mediathek
 ------------------------------------
 
-Version: 1.1.1
+Version: 1.1.2
 Author: Nils Hörrmann (post@nilshoerrmann.de)
-Build Date: 20th February 2009
+Build Date: 5th March 2009
 Requirements: Symphony 2.0
 
 
@@ -28,6 +28,11 @@ Requirements: Symphony 2.0
 
 
 [CHANGE LOG]
+
+Version 1.1.2 - 5th March 2009
+
+- [fixed]   changed color handling on drop
+- [fixed]   corrected regex used to determine id of newly created items
 
 Version 1.1.1 - 20th February 2009
 

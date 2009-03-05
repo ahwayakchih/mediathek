@@ -4,8 +4,8 @@
 *	author:		Nils Hörrmann
 *	contact:	post@nilshoerrmann.de
 *	website:	www.nilshoerrmann.de
-*	version:	1.1
-*	date:		February 2009
+*	version:	1.1.2
+*	date:		March 2009
 *	licence:	MIT, see licence file
 *
 *	The autocomplete feature is based on Kyle Neath's select_autocompleter.js, released under MIT license
