@@ -195,11 +195,10 @@
 				"SELECT t1.`id` 
 				FROM  `tbl_fields` AS t1
 				INNER JOIN  `tbl_fields` AS t2
-				WHERE t1.`type` LIKE 'taglist' AND t1.`parent_section` = t2.`parent_section` AND t2.`id` = '".$this->get('related_field_id')."'
-				OR t1.`type` LIKE 'select' AND t1.`parent_section` = t2.`parent_section` ANd t2.`id` = '".$this->get('related_field_id')."'
+				WHERE t1.`type` IN ('taglist', 'select') AND t1.`parent_section` = t2.`parent_section` AND t2.`id` = '".$this->get('related_field_id')."'
 				LIMIT 30"		
 			);
-		
+
 		}
 
 		// Publish Entry (New, Edit)
